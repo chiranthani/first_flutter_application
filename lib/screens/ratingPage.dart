@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:hello_app/screens/login.dart';
-
 class RatingPage extends StatefulWidget {
   RatingPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _RatingPageState createState() => _RatingPageState();
 }
 
-class _SignUpPageState extends State<RatingPage> {
+class _RatingPageState extends State<RatingPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -33,167 +31,127 @@ class _SignUpPageState extends State<RatingPage> {
     );
   }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
-
-  Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: Text(
-        'Register Now',
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
-  }
-
-  Widget _loginAccountLabel() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Already have an account ?',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            },
-            child: Text(
-              'Login',
-              style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'd',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
-          ),
-          children: [
-            TextSpan(
-              text: 'ev',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: 'rnz',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
-            ),
-          ]),
+      text: TextSpan(children: [
+        TextSpan(
+          text: 'Reviews',
+          style: TextStyle(color: Colors.black, fontSize: 20),
+        ),
+      ]),
     );
   }
 
-  Widget _emailPasswordWidget() {
-    return Column(
+  static final fullStar = Icon(Icons.star, color: Colors.yellow[500]);
+  static final halfStar = Icon(
+    Icons.star_half,
+    color: Colors.yellow[500],
+  );
+
+  static final starRow = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _entryField("Username"),
-        _entryField("Email id"),
-        _entryField("Password", isPassword: true),
-      ],
-    );
-  }
+        fullStar,
+        fullStar,
+        fullStar,
+        halfStar,
+      ]);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-            child:Container(
-              height: MediaQuery.of(context).size.height,
-              child:Stack(
+            child: Container(
+      height: MediaQuery.of(context).size.height,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            child: ListView(
+              padding: EdgeInsets.all(10.0),
+              children: <Widget>[
+                _title(),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+                _buildCard('images/people.png', '10/01/2020'),
+                _buildCard('images/people.png', '12/01/2020'),
+                _buildCard('images/people.png', '15/01/2020'),
+                _buildCard('images/people.png', '02/02/2020'),
+                _buildCard('images/people.png', '10/02/2020'),
+                SizedBox(
+                  height: 16.0,
+                ),
+              ],
+            ),
+          ),
+          Positioned(top: 40, left: 0, child: _backButton()),
+        ],
+      ),
+    )));
+  }
+
+  //CardView
+  Card _buildCard(String path, String date) {
+    return Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50.0),
+                  child: Image.asset(
+                    path,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Column(
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 3,
-                          child: SizedBox(),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: starRow,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          date,
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        _title(),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        _emailPasswordWidget(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _submitButton(),
-                        Expanded(
-                          flex: 2,
-                          child: SizedBox(),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _loginAccountLabel(),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Item delivered in good condition.',
+                      ),
+                      Text(' I will recommend to other buyers.')
+                    ],
                   ),
-                  Positioned(top: 40, left: 0, child: _backButton()),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * .15,
-                      right: -MediaQuery.of(context).size.width * .4,
-                 )
                 ],
               ),
-            )
-        )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

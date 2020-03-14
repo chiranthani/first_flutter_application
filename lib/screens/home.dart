@@ -5,7 +5,6 @@ import 'package:hello_app/screens/ratingPage.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       title: 'Welcome Page',
       theme: ThemeData(primarySwatch: Colors.blue),
@@ -15,16 +14,12 @@ class Home extends StatelessWidget {
 }
 
 class FirstHomeApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(
-                  "images/logo.png"), fit: BoxFit.cover)),
-
+              image: AssetImage("images/1.jpeg"), fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -45,73 +40,68 @@ class FirstHomeApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 40.0,),
+                SizedBox(
+                  height: 40.0,
+                ),
                 Material(
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => RatingPage()));
-                  },
                   elevation: 5.0,
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(30.0),
                   child: OutlineButton(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     disabledBorderColor: Colors.white,
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    onPressed: () {},
-                    borderSide: BorderSide(
-                        color: Colors.white
-                    ),
-
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    onPressed: () {
+                      navigateToSignUpPage(context);
+                    },
+                    borderSide: BorderSide(color: Colors.white),
                     child: Text("SignUp",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
-                        )
-                    ),
+                            fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
                 ),
-
                 SizedBox(
                     height: 40.0,
                     child: Center(
                       child: Text(
-                        'OR SKIP',
-                        style: TextStyle(
-                            color: Colors.white
-                        ),
+                        'OR',
+                        style: TextStyle(color: Colors.white),
                       ),
-                    )
-                ),
-
+                    )),
                 Material(
                   elevation: 5.0,
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(30.0),
                   child: OutlineButton(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    borderSide: BorderSide(
-                        color: Colors.white
-                    ),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.white),
                     disabledBorderColor: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      navigateToLoginPage(context);
+                    },
                     child: Text("Login",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
-                        )
-                    ),
+                            fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
                 ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 
+  void navigateToSignUpPage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RatingPage()));
+  }
 
+  void navigateToLoginPage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
+  }
 }

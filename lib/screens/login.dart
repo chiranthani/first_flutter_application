@@ -48,6 +48,8 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
+                  prefixIcon: Icon(Icons.email),
+                  hintText: title,
                   fillColor: Color(0xfff3f3f4),
                   filled: true))
         ],
@@ -61,18 +63,14 @@ class _LoginPageState extends State<LoginPage> {
       padding: EdgeInsets.symmetric(vertical: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.deepPurpleAccent.shade200,
+            offset: Offset(2, 4),
+          )
+        ],
+      ),
       child: Text(
         'Login',
         style: TextStyle(fontSize: 20, color: Colors.white),
@@ -93,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 10),
             ),
           ),
-          Text('or'),
+          Text('OR'),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -109,10 +107,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _facebookButton() {
     return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(vertical: 20),
+      height: 40,
+      margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Row(
         children: <Widget>[
@@ -129,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text('f',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 25,
+                      fontSize: 28,
                       fontWeight: FontWeight.w400)),
             ),
           ),
@@ -139,14 +137,14 @@ class _LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration(
                 color: Color(0xff2872ba),
                 borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+                    bottomRight: Radius.circular(20),
+                    topRight: Radius.circular(20)),
               ),
               alignment: Alignment.center,
-              child: Text('Log in with Facebook',
+              child: Text('Login with Facebook',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 13,
                       fontWeight: FontWeight.w400)),
             ),
           ),
@@ -155,7 +153,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _createAccountLabel() {
+  Widget _googleButton() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(vertical: 10),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.grey,
+          image: DecorationImage(
+              image: AssetImage("images/background-image-2.jpg"),
+              fit: BoxFit.cover)),
+      child: Text(
+        'Login with Google',
+        style: TextStyle(fontSize: 13, color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _createAccount() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -163,13 +179,12 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Don\'t have an account ?',
+            'Not have account ? Sign Up',
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             width: 10,
           ),
-
         ],
       ),
     );
@@ -179,20 +194,10 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'd',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
-          ),
           children: [
             TextSpan(
-              text: 'ev',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: 'rnz',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
+              text: 'Treva Shop',
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
           ]),
     );
@@ -201,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
+        _entryField("Email"),
         _entryField("Password", isPassword: true),
       ],
     );
@@ -210,59 +215,52 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 3,
-                          child: SizedBox(),
-                        ),
-                        _title(),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        _emailPasswordWidget(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _submitButton(),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.centerRight,
-                          child: Text('Forgot Password ?',
-                              style:
-                              TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                        ),
-                        _divider(),
-                        _facebookButton(),
-                        Expanded(
-                          flex: 2,
-                          child: SizedBox(),
-                        ),
-                      ],
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _createAccountLabel(),
-                  ),
-                  Positioned(top: 40, left: 0, child: _backButton()),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * .15,
-                      right: -MediaQuery.of(context).size.width * .4,
-                      )
-                ],
+                    _title(),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    _facebookButton(),
+                    _googleButton(),
+                    _divider(),
+                    _emailPasswordWidget(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    _submitButton(),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.centerRight,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(),
+                    ),
+                  ],
+                ),
               ),
-            )
-        )
-    );
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _createAccount(),
+              ),
+              Positioned(top: 40, left: 0, child: _backButton()),
+            ],
+          ),
+        )));
   }
 }
